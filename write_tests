@@ -1,0 +1,9 @@
+write_tests
+ARGS: {
+  "code": "import string\nfrom collections import Counter\nfrom typing import Dict, List, Any\nfrom nltk.corpus import stopwords\nfrom nltk.tokenize import word_tokenize\nfrom nltk.sentiment import SentimentIntensityAnalyzer\n\n\ndef test_analyze_sentiment_and_keywords():\n    text = 'I love spending time with my family and friends. They make me feel happy and supported.'\n    expected_output = {'sentiment_score': 0.9051, 'keywords': ['love', 'happy', 'spending', 'time', 'family']}\n    assert analyze_sentiment_and_keywords(text) == expected_output\n\n    text = 'I hate being stuck in traffic. It makes me feel angry and frustrated.'\n    expected_output = {'sentiment_score': -0.7717, 'keywords': ['hate', 'angry', 'frustrated', 'traffic']}\n    assert analyze_sentiment_and_keywords(text) == expected_output\n\n    text = 'The movie was great! I loved the plot and the acting, and the cinematography was beautiful.'\n    expected_output = {'sentiment_score': 0.802, 'keywords': ['loved', 'great', 'acting', 'plot', 'cinematography']}\n    assert analyze_sentiment_and_keywords(text) == expected_output\n\n    text = 'The food was terrible. It was cold, undercooked, and tasted awful.'\n    expected_output = {'sentiment_score': -0.9055, 'keywords': ['terrible', 'tasted', 'cold', 'undercooked', 'food']}\n    assert analyze_sentiment_and_keywords(text) == expected_output\n\n    text = 'I am feeling neutral about the presentation. It was neither good nor bad.'\n    expected_output = {'sentiment_score': 0.0, 'keywords': ['neutral', 'feeling', 'presentation', 'neither', 'good']}\n    assert analyze_sentiment_and_keywords(text) == expected_output\n",
+  "focus": [
+    "writing test cases for the improve_analyze_code function",
+    
+    "evaluating the improve_analyze_code function using the evaluate_code command"
+  ]
+}
