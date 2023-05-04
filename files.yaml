@@ -1,0 +1,27 @@
+AutodidactAI:
+- src:
+  - data_collector.py
+  - model_trainer.py
+  - evaluator.py
+  - feedback_collector.py
+  - autodidactai.py
+- data:
+  - raw_data
+  - processed_data
+- models:
+  - trained_models
+- evaluation:
+  - evaluation_results
+- feedback:
+  - user_feedback
+- docs:
+  - README.md
+  - CONTRIBUTING.md
+  - CODE_OF_CONDUCT.md
+- blog:
+  - The_Path_to_Recursive_Self-Improvement.md
+  - Harnessing_the_Power_of_Superintelligence.md
+- LICENSE
+- .gitignore
+new_folder:
+- new_file.txt
