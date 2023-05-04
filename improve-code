@@ -1,0 +1,42 @@
+import string
+from collections import Counter
+from typing import Dict, List, Any
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+
+def analyze_sentiment_and_keywords(text: str, positive_words: set = None, negative_words: set = None) -> Dict[str, Any]:
+    '''
+    Analyzes the sentiment score and keywords of an input text. The output is a dictionary with keys 'sentiment_score' and 'keywords',
+    which represent the sentiment score of the input text and the keywords contained in it, respectively.
+    '''
+    if not text:
+        raise TypeError('Input text cannot be empty.')
+    if not positive_words:
+        positive_words = {'good', 'great', 'excellent', 'fantastic', 'love', 'awesome', 'amazing', 'happy', 'joyful', 'pleased', 'satisfied', 'positive'}
+    if not negative_words:
+        negative_words = {'bad', 'terrible', 'horrible', 'awful', 'hate', 'dislike', 'sad', 'angry', 'displeased', 'unsatisfied', 'negative'}
+
+    # Remove punctuation from the text
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    # Tokenize the text
+    words = word_tokenize(text)
+    # Remove stop words from the text
+    stop_words = set(stopwords.words('english'))
+    words = [word for word in words if word.lower() not in stop_words]
+
+    # Count the positive and negative words using a Counter object
+    word_counts = Counter(words)
+    positive_count = sum([word_counts[word] for word in positive_words])
+    negative_count = sum([word_counts[word] for word in negative_words])
+
+    # Analyze the sentiment score using the VADER algorithm
+    sentiment_analyzer = SentimentIntensityAnalyzer()
+    sentiment_score = sentiment_analyzer.polarity_scores(text)['compound']
+
+    # Sort keywords by frequency, in descending order
+    sorted_word_counts = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
+    keywords = [x[0] for x in sorted_word_counts[:min(5, len(sorted_word_counts))]]
+
+    return {'sentiment_score': sentiment_score, 'keywords': keywords}
